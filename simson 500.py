@@ -45,6 +45,8 @@ class Human:
             print(f"State - {car.state}")
 
     def live(self):
+        if self.health > 100:
+            self.health = 100
         if self.alive == True:
             print("-" * 30)
             self.info()
@@ -59,6 +61,9 @@ class House:
         if  self.trash > 0:
             self.trash -= 10
             human.health -= 1
+        if self.trash < 0:
+            self.trash = 0
+
 
 class Car:
     def __init__(self, model):
@@ -67,12 +72,13 @@ class Car:
         self.state = 100 # %
         self.take = False
     def drive(self):
-        if self.take == True:
+        if self.take == True and self.fuel > 0:
            self.fuel -= 5
            self.state -= 5
     def crash(self):
         if self.state < 0 and self.take == True:
-            human.car = None
+            human.car_e = False
+            self.take = False
     def fix(self):
         if self.take == True:
             human.wallet -= 15
@@ -82,6 +88,8 @@ class Car:
         if self.take == True:
             human.wallet -= 20
             self.fuel += 20
+            if self.fuel > 60:
+                self.fuel = 60
 
 
 
