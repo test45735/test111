@@ -5,7 +5,7 @@ class Human:
         self.name = name
         self.car_e = False # false = no car, true = have a car
         self.job = job
-        self.wallet = 50 # $
+        self.wallet = 9999999999 # $
         self.health = 100 # %
         self.alive = True
     def work(self):
@@ -22,6 +22,7 @@ class Human:
         if self.wallet > 1000:
             self.car_e = True
             car.take = True
+            self.wallet -= 1000
     def eat(self):
         if house.food > 0:
             house.food -= 1
@@ -45,6 +46,32 @@ class Human:
             print(f"State - {car.state}")
 
     def live(self):
+        print("Enter any 3 actions: /work, /sleep, /shopping, /eat, /chill, /clean")
+        if self.car_e == True:
+            print("/drive, /fix, /oil")
+        x1 = input()
+        if x1  == "/work":
+            self.work()
+        elif x1  == "/sleep":
+            self.sleep()
+        elif x1  == "/shopping":
+            self.shopping()
+        elif x1  == "/eat":
+            self.eat()
+        elif x1  == "/sleep":
+            self.sleep()
+        elif x1  == "/chill":
+            self.chill()
+        elif x1  == "/clean":
+            house.clean()
+        if self.car_e == True:
+            if x1  == "/drive":
+                car.drive()
+            if x1  == "/fix":
+                car.fix()
+            if x1 == "/oil":
+                car.pay_oil()
+            car.crash()
         if self.health > 100:
             self.health = 100
         if self.alive == True:
@@ -54,7 +81,8 @@ class Human:
         if self.alive == False:
             print("Over of life")
 class House:
-    def __init__(self):
+    def __init__(self, have):
+        self.have = have
         self.food = 0
         self.trash = 0
     def clean(self):
@@ -101,6 +129,7 @@ class Job:
 car = Car("BMW")
 job = Job("Programmer", 50)
 human = Human("Ivan", job = Job)
-house = House()
+house = House("have")
 
-human.live()
+while True:
+    human.live()
