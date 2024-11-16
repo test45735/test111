@@ -48,7 +48,7 @@ f1 = File1()
 f2 = File2()
 f3 = File3()
 
-print("Enter number of file: file1, file2, file3")
+print("Enter number of file: 1, 2, 3")
 try:
     p = int(input("number = "))
     if p == 1:
